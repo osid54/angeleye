@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://deb56j8gcqvkh"]
+
+[ext_resource type="PackedScene" uid="uid://c6xsm1r7sjpdy" path="res://src/actors/Player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/actors/MouseCol.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://src/actors/shooter.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/projectiles/Bomb.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://dst44wihss53q" path="res://src/sprites/angelEyeSpreadsheet/box0.png" id="4_t4llt"]
+[ext_resource type="PackedScene" uid="uid://4rstdat7sbkc" path="res://src/actors/enemyBox.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://dejudwc7uauy2" path="res://src/sprites/angelEyeSpreadsheet/box1.png" id="5_o24a7"]
+[ext_resource type="Texture2D" uid="uid://bjev3qtgbd37o" path="res://src/sprites/particles/particle.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cpx6asvqaf401" path="res://src/sprites/angelEyeSpreadsheet/box2.png" id="6_gdukn"]
+[ext_resource type="Texture2D" uid="uid://bitwdfnj62xnl" path="res://src/sprites/angelEyeSpreadsheet/box3.png" id="7_1hifv"]
+[ext_resource type="Texture2D" uid="uid://feoo3yeud25e" path="res://src/sprites/angelEyeSpreadsheet/box4.png" id="8_ay7t0"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"blank",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_t4llt")
+}],
+"loop": true,
+"name": &"box",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_o24a7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gdukn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1hifv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ay7t0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.439941
+color = Color(0.372549, 0.454902, 0.596078, 1)
+
+[node name="enemyBox" type="Node" parent="."]
+
+[node name="shooterBullet" parent="enemyBox" instance=ExtResource("3")]
+
+[node name="shooterBomb" parent="enemyBox" instance=ExtResource("3")]
+projectile = ExtResource("4")
+
+[node name="Box" parent="enemyBox" instance=ExtResource("5")]
+sprite_frames = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemyBox/Box"]
+modulate = Color(0.141176, 0.215686, 0.329412, 1)
+z_index = -100
+position = Vector2(0.00012207, -0.00012207)
+scale = Vector2(16.29, 16.29)
+texture = ExtResource("6")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(422, 295)
+
+[node name="MouseCol" parent="." instance=ExtResource("2")]
+position = Vector2(-125, 29)

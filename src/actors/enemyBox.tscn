@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=3 uid="uid://4rstdat7sbkc"]
+
+[ext_resource type="Texture2D" uid="uid://bitwdfnj62xnl" path="res://src/sprites/angelEyeSpreadsheet/box3.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://feoo3yeud25e" path="res://src/sprites/angelEyeSpreadsheet/box4.png" id="2"]
+[ext_resource type="Script" path="res://src/actors/enemyBox.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://dejudwc7uauy2" path="res://src/sprites/angelEyeSpreadsheet/box1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cpx6asvqaf401" path="res://src/sprites/angelEyeSpreadsheet/box2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c0tpw401ynni7" path="res://src/sprites/angelEyeSpreadsheet/bomb.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dst44wihss53q" path="res://src/sprites/angelEyeSpreadsheet/box0.png" id="7"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"blank",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7")
+}],
+"loop": true,
+"name": &"box",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_u01ib"]
+offsets = PackedFloat32Array(0.740741, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vmp4f"]
+gradient = SubResource("Gradient_u01ib")
+
+[sub_resource type="Curve" id="Curve_bly8i"]
+_data = [Vector2(0.277108, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.7), -1.39301, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rmhdb"]
+curve = SubResource("Curve_bly8i")
+
+[sub_resource type="ParticleProcessMaterial" id="2"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 20.0
+damping_max = 20.0
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_rmhdb")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_vmp4f")
+
+[node name="Box" type="AnimatedSprite2D"]
+position = Vector2(6.10352e-05, 3.05176e-05)
+scale = Vector2(0.849636, 0.849636)
+sprite_frames = SubResource("1")
+animation = &"blank"
+script = ExtResource("3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+process_material = SubResource("2")
+texture = ExtResource("6")
+lifetime = 3.0
+preprocess = 5.0
