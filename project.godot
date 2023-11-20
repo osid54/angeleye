@@ -14,7 +14,7 @@ config/name="angel eye"
 run/main_scene="res://src/screens/Main.tscn"
 config/features=PackedStringArray("4.1")
 run/low_processor_mode=true
-config/icon="res://icon.png"
+config/icon="res://src/sprites/angelEyeSpreadsheet/eye1.png"
 
 [autoload]
 
